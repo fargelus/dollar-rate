@@ -1,8 +1,29 @@
 # frozen_string_literal: true
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+require 'net/http'
+
+class RateSeed
+  RATE_URI = 'https://www.cbr-xml-daily.ru/daily_json.js'
+
+  def initialize
+    @data = {}
+    read_data
+    seed
+  end
+
+  def read_data
+    uri = URI(RATE_URI)
+    response = Net::HTTP.get(uri)
+    @data = JSON.parse(response)
+  end
+
+  private
+
+  def seed
+    rate = @data.dig('Valute', 'USD', 'Valu')
+    Rate.create!(rate: rate) && return if rate
+    puts %q{Can't create db record from nil value. Sorry):}
+  end
+end
+
+RateSeed.new
