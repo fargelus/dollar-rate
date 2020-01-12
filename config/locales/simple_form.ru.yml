@@ -8,7 +8,10 @@ ru:
     labels:
       rate:
         rate: 'Курс доллара к рублю:'
-        force_date: 'Дата фиксации курса:'
+        force_date: 'Зафиксировать до:'
+    placeholders:
+      rate:
+        rate: 'Пример: 62.65'
   helpers:
     submit:
       rate:
