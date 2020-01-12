@@ -20,9 +20,9 @@ class RateSeed
   private
 
   def seed
-    rate = @data.dig('Valute', 'USD', 'Valu')
+    rate = @data.dig('Valute', 'USD', 'Value')
     Rate.create!(rate: rate) && return if rate
-    puts %q{Can't create db record from nil value. Sorry):}
+    puts "Can't create db record from nil value. Sorry):"
   end
 end
 

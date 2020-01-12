@@ -2,6 +2,6 @@
 
 Rails.application.routes.draw do
   root to: 'home#index'
-  get 'admin' => 'rates#edit'
-  resources :rates, only: :update
+  get 'admin' => 'rates#new'
+  resources :rates, only: %i[new create]
 end

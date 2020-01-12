@@ -1,0 +1,12 @@
+<div class="mt-4">
+<%= simple_form_for @rate do |f| %>
+  <%= f.input :rate, required: true %>
+  <%= f.input :force_date, required: true,
+      input_html: {
+        value: Time.now,
+        min: now
+      },
+      as: :datetime, html5: true %>
+  <%= f.submit %>
+<% end %>
+</div>

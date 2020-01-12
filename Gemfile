@@ -12,6 +12,7 @@ gem 'pg', '~> 0.20'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.2'
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
@@ -34,5 +35,6 @@ group :test do
 end
 
 group :development, :test do
+  gem 'i18n-debug', '~> 1.2.0'
   gem 'rspec-rails', '~> 3.9.0'
 end

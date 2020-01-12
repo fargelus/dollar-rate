@@ -1,0 +1,15 @@
+ru:
+  simple_form:
+    required:
+      text: 'Обязательно к заполнению'
+      mark: '*'
+    error_notification:
+      default_message: "Пожалуйста поправьте ошибки в форме:"
+    labels:
+      rate:
+        rate: 'Курс доллара к рублю:'
+        force_date: 'Дата фиксации курса:'
+  helpers:
+    submit:
+      rate:
+        create: 'Зафиксировать курс'
