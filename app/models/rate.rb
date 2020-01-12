@@ -2,8 +2,4 @@
 
 class Rate < ApplicationRecord
   validates :rate, presence: true
-
-  def self.current
-    last.rate
-  end
 end

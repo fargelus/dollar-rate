@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    @rate = Rate.current
+    @rate = Rate.last
   end
 end

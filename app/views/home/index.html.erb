@@ -2,7 +2,13 @@
   <%= link_to 'Зафиксировать курс', admin_path, class: 'float-right' %>
 
   <div class="lh-1 font-larger"><%=now%></div>
-  <div class="lh-1 mt-2 font-medium">1 доллар США равен <%=rubbles @rate%></div>
+  <div class="lh-1 mt-2 font-medium">1 доллар США равен <%=rubbles @rate.rate%></div>
+
+  <% if @rate.force_date %>
+    <div class="mt-3">
+      <%= react_component('Timer', { timeout: local_datetime(@rate.force_date) }) %>
+    </div>
+  <% end %>
 </div>
 
 <% if notice = flash.notice %>

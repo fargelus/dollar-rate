@@ -1,0 +1,81 @@
+import React from "react"
+import PropTypes from "prop-types"
+import TimeSince from "../helpers/time_since";
+
+
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.timeLeft = TimeSince(props.timeout);
+    this.state = {
+      remainTime: this.timeLeftView(),
+    };
+    this.tick();
+  }
+
+  timeLeftView() {
+    let { hours, minutes, seconds } = this.timeLeft;
+    hours = this.zeroView(hours);
+    minutes = this.zeroView(minutes);
+    seconds = this.zeroView(seconds);
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  zeroView(param) {
+    return ('' + param).length == 1 ? `0${param}` : param;
+  }
+
+  tick() {
+    const that = this;
+    const iID = setInterval(() => {
+      if (this.timeExpired()) {
+        clearInterval(iID);
+      }
+
+      that.countDown();
+      that.setState({
+        remainTime: that.timeLeftView()
+      });
+    }, 1000);
+  }
+
+  timeExpired() {
+    const { hours, minutes, seconds } = this.timeLeft;
+    return hours == 0 && minutes == 0 && seconds == 0;
+  }
+
+  countDown() {
+    let { hours, minutes, seconds } = this.timeLeft;
+    if (seconds > 0) {
+      seconds -= 1;
+    } else if (minutes > 0) {
+      minutes -= 1;
+      seconds = 59;
+    } else if (hours > 0) {
+      hours -= 1;
+      minutes = 59;
+    }
+
+    this.timeLeft = {
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        До обновления курса осталось: { this.state.remainTime }
+      </div>
+    )
+  }
+}
+
+Timer.propTypes = {
+  timeout: PropTypes.string
+};
+
+
+export default Timer

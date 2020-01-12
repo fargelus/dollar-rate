@@ -11,10 +11,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.20'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.2'
+gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
-gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'webpacker'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
