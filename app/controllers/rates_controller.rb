@@ -2,12 +2,14 @@
 
 class RatesController < ApplicationController
   def new
-    @rate = Rate.new
+    params = session[:rate]
+    @rate = Rate.new(params)
   end
 
   def create
     @rate = Rate.new(rate_params)
     if @rate.save
+      session[:rate] = rate_params.to_h
       redirect_to root_path, notice: 'Курс зафиксирован'
     else
       render 'edit'

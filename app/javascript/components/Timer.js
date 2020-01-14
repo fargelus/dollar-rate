@@ -11,6 +11,8 @@ class Timer extends React.Component {
     this.state = {
       remainTime: this.timeLeftView(),
     };
+
+    Timer.SECOND = 1000;
     this.tick();
   }
 
@@ -29,15 +31,15 @@ class Timer extends React.Component {
   tick() {
     const that = this;
     const iID = setInterval(() => {
-      if (this.timeExpired()) {
-        clearInterval(iID);
-      }
-
       that.countDown();
       that.setState({
         remainTime: that.timeLeftView()
       });
-    }, 1000);
+
+      if (that.timeExpired()) {
+        clearInterval(iID);
+      }
+    }, Timer.SECOND);
   }
 
   timeExpired() {
@@ -57,19 +59,16 @@ class Timer extends React.Component {
       minutes = 59;
     }
 
-    this.timeLeft = {
-      hours: hours,
-      minutes: minutes,
-      seconds: seconds,
-    };
+    this.timeLeft = { hours: hours, minutes: minutes, seconds: seconds };
   }
 
   render() {
+    const timeout = this.timeExpired();
     return (
-      <div>
+      <div className={timeout ? 'fade-out' : ''}>
         До обновления курса осталось: { this.state.remainTime }
       </div>
-    )
+    );
   }
 }
 

@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def now
-    Time.now.strftime('%e/%m/%Y')
+    Date.today.strftime('%e/%m/%Y')
   end
 
   def rubbles(value)
@@ -11,5 +11,9 @@ module ApplicationHelper
 
   def local_datetime(time = Time.now)
     time.strftime('%Y-%m-%eT%H:%M')
+  end
+
+  def freeze_rate?(rate)
+    rate.force_date.future?
   end
 end
