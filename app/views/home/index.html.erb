@@ -2,7 +2,9 @@
   <%= link_to 'Зафиксировать курс', admin_path, class: 'float-right' %>
 
   <div class="lh-1 font-larger"><%=now%></div>
-  <div class="lh-1 mt-2 font-medium">1 доллар США равен <%=rubbles @rate.rate%></div>
+  <div class="lh-1 mt-2 font-medium">1 доллар США равен
+    <span id="rate-value"><%=rubbles @rate.rate%></span>
+  </div>
 
   <% if freeze_rate? @rate %>
     <div class="mt-3">

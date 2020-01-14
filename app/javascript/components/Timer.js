@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import TimeSince from "../helpers/time_since";
+import TimeoutDispatcher from '../helpers/timeout_dispatcher';
 
 
 class Timer extends React.Component {
@@ -37,6 +38,7 @@ class Timer extends React.Component {
       });
 
       if (that.timeExpired()) {
+        TimeoutDispatcher();
         clearInterval(iID);
       }
     }, Timer.SECOND);

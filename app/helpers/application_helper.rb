@@ -14,6 +14,6 @@ module ApplicationHelper
   end
 
   def freeze_rate?(rate)
-    rate.force_date.future?
+    rate.force_date&.future?
   end
 end
