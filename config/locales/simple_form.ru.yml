@@ -16,3 +16,11 @@ ru:
     submit:
       rate:
         create: 'Зафиксировать курс'
+  activerecord:
+    errors:
+      models:
+        rate:
+          attributes:
+            force_date: ''
+  attributes:
+    force_date: ''

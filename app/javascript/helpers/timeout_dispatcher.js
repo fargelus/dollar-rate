@@ -1,5 +1,6 @@
 function TimeoutDispatcher() {
-  const event = new Event('timeout');
+  const timeoutEvent = CONSTANTS.Events.timeout;
+  const event = new Event(timeoutEvent);
   document.dispatchEvent(event);
 }
 

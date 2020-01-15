@@ -22,7 +22,8 @@ class ExchangeRate extends React.Component {
 
   listenChangeEvent() {
     const that = this;
-    $(document).on('change-rate', (_, rate) => {
+    const changeRateEvent = CONSTANTS.Events['change-rate'];
+    $(document).on(changeRateEvent, (_, rate) => {
       that.setState({
         rate_view: that.viewableRate(rate),
       });

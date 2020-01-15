@@ -14,10 +14,7 @@ class CreateRateFromScrapService < Callable
     return false unless @actual_rate
 
     is_valid = Rate.create!(rate: @actual_rate).valid?
-    RatesChannel.broadcast_to(
-      'rates_channel',
-      rate: @actual_rate
-    )
+    ChangeRateNotifier.call(@actual_rate)
     is_valid
   end
 end

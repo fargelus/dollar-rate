@@ -13,7 +13,6 @@ class Timer extends React.Component {
       remainTime: this.timeLeftView(),
     };
 
-    Timer.SECOND = 1000;
     this.tick();
   }
 
@@ -41,7 +40,7 @@ class Timer extends React.Component {
         TimeoutDispatcher();
         clearInterval(iID);
       }
-    }, Timer.SECOND);
+    }, CONSTANTS.Timer.second);
   }
 
   timeExpired() {

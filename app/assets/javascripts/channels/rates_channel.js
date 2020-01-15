@@ -1,5 +1,5 @@
 App.cable.subscriptions.create('RatesChannel', {
   received(data) {
-    $(document).trigger('change-rate', data.rate);
+    $(document).trigger(CONSTANTS.Events['change-rate'], data.rate);
   }
 });
