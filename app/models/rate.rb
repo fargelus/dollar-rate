@@ -9,7 +9,7 @@ class Rate < ApplicationRecord
     rate.nil? ? Rate.last_without_force_date : rate
   }
 
-  scope :last_without_force_date, lambda {
-    Rate.where(force_date: nil).last
-  }
+  def self.last_without_force_date
+    where(force_date: nil).last
+  end
 end

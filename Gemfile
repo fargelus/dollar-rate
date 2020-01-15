@@ -34,12 +34,14 @@ group :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 4.1.2'
   gem 'simplecov'
 end
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+  gem 'factory_bot_rails', '~> 5.1.1'
   gem 'i18n-debug', '~> 1.2.0'
   gem 'rspec-rails', '~> 3.9.0'
 end
