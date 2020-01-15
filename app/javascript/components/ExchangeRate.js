@@ -21,13 +21,18 @@ class ExchangeRate extends React.Component {
   }
 
   listenChangeEvent() {
-    const that = this;
     const changeRateEvent = CONSTANTS.Events['change-rate'];
-    $(document).on(changeRateEvent, (_, rate) => {
+    const that = this;
+    $(document).on(changeRateEvent, data => that.updateRateFromSource(data.rate));
+  }
+
+  updateRateFromSource() {
+    const that = this;
+    $.getJSON('/', data =>
       that.setState({
-        rate_view: that.viewableRate(rate),
-      });
-    });
+        rate_view: that.viewableRate(data.rate),
+      })
+    );
   }
 
   render () {

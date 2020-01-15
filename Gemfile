@@ -31,7 +31,10 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'selenium-webdriver'
+  gem 'simplecov'
 end
 
 group :development, :test do
