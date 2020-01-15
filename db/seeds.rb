@@ -2,7 +2,9 @@
 
 class RateSeed
   def initialize
-    puts "Can't create db record. Sorry):" unless RateRecordCreator.call
+    unless CreateRateFromScrapService.call
+      puts "Can't create db record. Sorry):"
+    end
   end
 end
 

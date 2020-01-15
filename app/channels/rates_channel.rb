@@ -2,6 +2,6 @@
 
 class RatesChannel < ApplicationCable::Channel
   def subscribed
-    stream_from 'rate_channel'
+    stream_for 'rates_channel'
   end
 end

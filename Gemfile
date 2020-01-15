@@ -20,10 +20,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'whenever', require: false
 
-group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
-end
-
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', '~> 0.75.0'
@@ -39,6 +35,8 @@ group :test do
 end
 
 group :development, :test do
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'i18n-debug', '~> 1.2.0'
   gem 'rspec-rails', '~> 3.9.0'
 end

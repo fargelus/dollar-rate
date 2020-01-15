@@ -6,5 +6,5 @@ env :PATH, ENV['PATH']
 env :GEM_PATH, ENV['GEM_PATH']
 
 every 1.minute do
-  runner 'RateRecordCreator.call'
+  runner 'CreateRateFromScrapService.call'
 end

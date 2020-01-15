@@ -4,7 +4,7 @@
 # Returns true if record successfully creates
 # Otherwise false
 
-class RateRecordCreator < Callable
+class CreateRateFromScrapService < Callable
   def initialize
     @data = FetchRateDataService.call
     @actual_rate = @data.dig('Valute', 'USD', 'Value')
@@ -13,6 +13,11 @@ class RateRecordCreator < Callable
   def call
     return false unless @actual_rate
 
-    Rate.create!(rate: @actual_rate).valid?
+    is_valid = Rate.create!(rate: @actual_rate).valid?
+    RatesChannel.broadcast_to(
+      'rates_channel',
+      rate: @actual_rate
+    )
+    is_valid
   end
 end
