@@ -1,7 +1,7 @@
 <div class="mt-4">
   <%= link_to 'Зафиксировать курс', admin_path, class: 'float-right' %>
 
-  <div class="lh-1 font-larger"><%=now%></div>
+  <div class="lh-1 font-larger"><%=today%></div>
   <div class="lh-1 mt-2 font-medium d-flex">1 доллар США равен
     <%= react_component('ExchangeRate', { rate: @rate.rate, classes: 'ml-2' }) %>
   </div>
