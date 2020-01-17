@@ -13,8 +13,9 @@ class CreateRateFromScrapService < Callable
   def call
     return false unless @actual_rate
 
-    is_valid = Rate.create!(rate: @actual_rate).valid?
-    ChangeRateNotifier.call(@actual_rate)
-    is_valid
+    new_rate = Rate.create!(rate: @actual_rate)
+    has_force_date = GetRateWithFutureForceDate.call
+    ChangeRateNotifier.call(@actual_rate) unless has_force_date
+    new_rate.valid?
   end
 end

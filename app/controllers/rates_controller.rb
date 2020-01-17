@@ -10,7 +10,7 @@ class RatesController < ApplicationController
     @rate = Rate.new(rate_params)
     if @rate.save
       session[:rate] = rate_params.to_h
-      ChangeRateNotifier.call(@rate.rate)
+      ChangeRateNotifier.call(@rate)
       redirect_to root_path, notice: 'Курс зафиксирован'
     else
       render 'new'

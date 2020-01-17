@@ -88,7 +88,9 @@ class Timer extends React.Component {
   listenUpdateEvent() {
     const updateTimerEvent = CONSTANTS.Events['update-timer'];
     const that = this;
-    $(document).on(updateTimerEvent, timeout => {that.triggerTick(timeout)});
+    $(document).on(updateTimerEvent, (_, timeout) => {
+      that.triggerTick(timeout)
+    });
   }
 
   timeNotCountable() {

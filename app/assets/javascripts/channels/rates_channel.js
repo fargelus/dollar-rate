@@ -1,9 +1,8 @@
 App.cable.subscriptions.create('RatesChannel', {
   received(data) {
+    const { rate } = data;
     const { Events } = CONSTANTS;
-    $.getJSON('/', data => {
-      $(document).trigger(Events['change-rate'], data.rate);
-      $(document).trigger(Events['update-timer'], data.force_date);
-    });
+    $(document).trigger(Events['change-rate'], rate.rate);
+    $(document).trigger(Events['update-timer'], rate.force_date);
   }
 });
