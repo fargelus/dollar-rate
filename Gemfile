@@ -33,6 +33,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 4.1.2'
   gem 'simplecov'

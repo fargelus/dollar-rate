@@ -6,11 +6,9 @@
     <%= react_component('ExchangeRate', { rate: @rate.rate, classes: 'ml-2' }) %>
   </div>
 
-  <% if freeze_rate? @rate %>
-    <div class="mt-3">
-      <%= react_component('Timer', { timeout: local_datetime(@rate.force_date) }) %>
-    </div>
-  <% end %>
+  <div class="mt-3">
+    <%= react_component('Timer', { timeout: @rate.force_date })%>
+  </div>
 </div>
 
 <% if notice = flash.notice %>

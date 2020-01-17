@@ -8,12 +8,29 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.timeLeft = TimeSince(props.timeout);
     this.state = {
-      remainTime: this.timeLeftView(),
+      remainTime: '',
     };
+    this.timeLeft = {};
+    this.timerID;
+  }
 
+  componentDidMount() {
+    this.triggerTick(this.props.timeout);
+    this.listenUpdateEvent();
+  }
+
+  triggerTick(timeout) {
+    this.setRemainTime(timeout);
+    this.resetTimer();
     this.tick();
+  }
+
+  setRemainTime(timeout) {
+    this.timeLeft = TimeSince(timeout);
+    this.setState({
+      remainTime: this.timeLeftView()
+    });
   }
 
   timeLeftView() {
@@ -21,16 +38,21 @@ class Timer extends React.Component {
     hours = this.zeroView(hours);
     minutes = this.zeroView(minutes);
     seconds = this.zeroView(seconds);
-    return `${hours}:${minutes}:${seconds}`;
+    const { separator } = CONSTANTS.Timer;
+    return `${hours}${separator}${minutes}${separator}${seconds}`;
   }
 
   zeroView(param) {
     return ('' + param).length == 1 ? `0${param}` : param;
   }
 
+  resetTimer() {
+    clearInterval(this.timerID);
+  }
+
   tick() {
     const that = this;
-    const iID = setInterval(() => {
+    this.timerID = setInterval(() => {
       that.countDown();
       that.setState({
         remainTime: that.timeLeftView()
@@ -38,14 +60,9 @@ class Timer extends React.Component {
 
       if (that.timeExpired()) {
         TimeoutDispatcher();
-        clearInterval(iID);
+        that.resetTimer();
       }
     }, CONSTANTS.Timer.second);
-  }
-
-  timeExpired() {
-    const { hours, minutes, seconds } = this.timeLeft;
-    return hours == 0 && minutes == 0 && seconds == 0;
   }
 
   countDown() {
@@ -63,7 +80,31 @@ class Timer extends React.Component {
     this.timeLeft = { hours: hours, minutes: minutes, seconds: seconds };
   }
 
+  timeExpired() {
+    const { hours, minutes, seconds } = this.timeLeft;
+    return hours == 0 && minutes == 0 && seconds == 0;
+  }
+
+  listenUpdateEvent() {
+    const updateTimerEvent = CONSTANTS.Events['update-timer'];
+    const that = this;
+    $(document).on(updateTimerEvent, timeout => {that.triggerTick(timeout)});
+  }
+
+  timeNotCountable() {
+    const { remainTime } = this.state;
+    const { separator } = CONSTANTS.Timer;
+    return remainTime.split(separator)
+                     .filter(time => isNaN(+time))
+                     .length;
+  }
+
   render() {
+    if (this.timeNotCountable()) {
+      this.resetTimer();
+      return <div></div>;
+    }
+
     const timeout = this.timeExpired();
     return (
       <div className={timeout ? 'fade-out' : ''}>
