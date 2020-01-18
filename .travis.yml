@@ -5,7 +5,7 @@ addons:
   postgresql: 9.6
 env:
   global:
-  - CC_TEST_REPORTER_ID=146d8f2d057309414efe547598ed9fbdc20c94c3e1195c1028cad6e363f4cbfb
+  - CC_TEST_REPORTER_ID=59757c145532522718e2d55f66807cdb13466faf74e66c8707a817dcc924785a
   - REDISTOGO_URL=redis://localhost:6379/1
 before_script:
 - cp config/database.yml.travis config/database.yml
