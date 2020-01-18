@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+- 2.6.5
+addons:
+  postgresql: 9.6
+env:
+  global:
+  - CC_TEST_REPORTER_ID=146d8f2d057309414efe547598ed9fbdc20c94c3e1195c1028cad6e363f4cbfb
+  - REDISTOGO_URL=redis://localhost:6379/1
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
+script:
+- bundle exec rspec
+after_script:
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
