@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe HomeController, type: :controller do
   describe 'GET #index' do
-    before { get :index }
     let!(:rate) { create(:rate) }
     let(:current_rate) { Rate.current }
 
+    before { get :index }
     it 'has success response' do
       expect(response).to have_http_status(:success)
     end
@@ -24,7 +24,7 @@ RSpec.describe HomeController, type: :controller do
     end
 
     it 'returns current rate' do
-      expect(assigns[:rate]).to eq([current_rate])
+      expect(assigns[:rate]).to eq(current_rate)
     end
   end
 end
